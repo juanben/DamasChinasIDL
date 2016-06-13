@@ -59,10 +59,10 @@ public class Move {
     
     public Move(Desk desk, String s) throws MoveException {
         if ((s.length() != 5) || (s.charAt(0) < 'a' || s.charAt(0) > 'h') || (s.charAt(1) < '1' || s.charAt(1) > '8') || (s.charAt(2) != '-' && s.charAt(2) != 'x') || (s.charAt(3) < 'a' || s.charAt(3) > 'h') || (s.charAt(4) < '1' || s.charAt(4) > '8')) {
-            throw new MoveException("Tah není zapsán ve správné notaci!");
+            throw new MoveException("Movimiento no registrado en la notacion correcta");
         }
         if (desk == null) {
-            throw new MoveException("Desk je null!");
+            throw new MoveException("Disco nulo");
         }
         
         source = desk.getPositionAt((int) s.charAt(0) - 'a', (int) s.charAt(1) - '1');

@@ -32,8 +32,8 @@ public abstract class GenericAI
         if (m == null)
         {
             desk.endGame();
-            JOptionPane.showMessageDialog(Game.getWindow(), getName() + " byl poražen. Blahopřeji!",
-               "Výhra!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(Game.getWindow(), getName() + " Fue derrotado. Enhorabuena",
+               "Victoria!", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Fin del juego");
             
             desk.getWhitePlayer().settype(Player.Type.HUMAN);
@@ -58,7 +58,7 @@ public abstract class GenericAI
                 desk.getNetLink().sendMove(m.getSource(), m.getDestination());
             }
             catch(NetException e){
-                System.err.println("Nezdarilo se sendMove() AI: "+e.toString());
+                System.err.println("Fracaso sendMove() AI: "+e.toString());
             }
         }
     }

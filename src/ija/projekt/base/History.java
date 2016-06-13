@@ -109,7 +109,7 @@ public class History extends DefaultListModel<String> {
     public void goToHistoryItem(int destinationId, boolean repeat) throws History.HistoryException {
         
         if( destinationId < -1 || destinationId >= getCount() ){
-            throw new HistoryException("Nelze prejit na tah "+destinationId+", ktery je mimo rozsah!");
+            throw new HistoryException("No se puede ir a la jugada "+destinationId+", que esta fuera de rango");
         }
         
         if( destinationId == currentId && !repeat ){
@@ -123,7 +123,7 @@ public class History extends DefaultListModel<String> {
         for( int i = 0; i <= destinationId; i++ ){
             Move item = getItem(i);
             if(item.getSource().getFigure() == null)
-               throw new HistoryException("Zdroj skoku ("+item.getSource().toString()+") nema figurku!");
+               throw new HistoryException("Salto fuente ("+item.getSource().toString()+") ninguna figura");
             if(item.isCapture()){
                 item.getSource().getFigure().capture(item.getDestination());
             }else{
@@ -136,14 +136,14 @@ public class History extends DefaultListModel<String> {
     
     
     public void playHistory(int interval){
-        System.out.println("Zahajeno prehravani partie");
+        System.out.println("Empieza a jugar");
         final int destinationId = getCurrent();
         desk.resetDesk();
         playTimer = new javax.swing.Timer(interval, new ActionListener(){
             @Override public void actionPerformed(ActionEvent evt){
                 
                 if(getCurrent() >= destinationId){
-                    System.out.println("Prehravani partie dokonceno");
+                    System.out.println("Jugar esta completo");
                     stopPlayingHistory();
                     desk.updateAllBackgrounds();
                     return;
@@ -152,10 +152,10 @@ public class History extends DefaultListModel<String> {
                 try{
                     goToHistoryItem(getCurrent()+1);
                 } catch (Exception ex) {
-                    System.err.println("Vyjimka pri prehravani partie:");
+                    System.err.println("Excepcion al jugar");
                     ex.printStackTrace(System.err);
                     JOptionPane.showMessageDialog(null, ex.toString(),
-                        "Chyba při přehrávání", JOptionPane.ERROR_MESSAGE);
+                        "Error de reproduccion", JOptionPane.ERROR_MESSAGE);
                 }
                 
             }
@@ -168,7 +168,7 @@ public class History extends DefaultListModel<String> {
     public void stopPlayingHistory(){
         playTimer.stop();
         playTimer = null;
-        playButton.setText("Přehrát");
+        playButton.setText("jugar");
     }
     
     

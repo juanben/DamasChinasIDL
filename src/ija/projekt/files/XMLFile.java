@@ -26,7 +26,7 @@ public class XMLFile extends javax.swing.filechooser.FileFilter {
     
     
     @Override public String getDescription(){
-        return "VnitÅ™nÃ­ XML notace (*.xml)";
+        return "Dentro de la notacion (*.xml)";
     }
     
     
@@ -104,7 +104,7 @@ public class XMLFile extends javax.swing.filechooser.FileFilter {
             writer.write(doc);
         }
         catch (Exception e) {
-            throw new RuntimeException("Error pretty printing xml. ", e);
+            throw new RuntimeException("Error de impresion xml", e);
         }
         
         fw.write(sw.toString());

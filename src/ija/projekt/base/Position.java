@@ -165,28 +165,28 @@ public final class Position extends JButton {
     {
         if (desk.isGameEnded())
         {
-            JOptionPane.showMessageDialog(Game.getWindow(), "Hra jiÅ¾ skonÄ�ila a vÃ­tÄ›zi bylo pogratulovÃ¡no."
-                    + "\nPro novou hru zvolte Hra -> NovÃ¡ Hra.",
-               "Nelze hrÃ¡t", JOptionPane.INFORMATION_MESSAGE);
-            System.err.println("Hra jiÅ¾ skonÄ�ila!");
+            JOptionPane.showMessageDialog(Game.getWindow(), "El juego finalzo y se felicita a los jugadores"
+                    + "\nPara un nuevo juego seleccion nuevo juego",
+               "No se puede reproducir", JOptionPane.INFORMATION_MESSAGE);
+            System.err.println("Juego termino");
             return;
         }
         
         
         if (!desk.getHistory().inPresent())
         {
-            JOptionPane.showMessageDialog(Game.getWindow(), "SnaÅ¾Ã­te se zmÄ›nit historii. To nenÃ­ moÅ¾nÃ©.",
-               "Jste vÄ�erejÅ¡Ã­", JOptionPane.INFORMATION_MESSAGE);
-            System.err.println("UÅ¾ivatel nemÅ¯Å¾e hrÃ¡t, pohybuje se v historii!");
+            JOptionPane.showMessageDialog(Game.getWindow(), "Estas tratando de cambiar la historia, no es posible",
+               " ", JOptionPane.INFORMATION_MESSAGE);
+            System.err.println("Los usuario no pueden jugar se mueve la historia");
             return;
         }
         
         
         if (desk.getPlayer().type() != Player.Type.HUMAN)
         {
-            JOptionPane.showMessageDialog(Game.getWindow(), "Nejste na tahu",
-               "NynÃ­ je na tahu druhÃ½ hrÃ¡Ä�!", JOptionPane.INFORMATION_MESSAGE);
-            System.err.println("UÅ¾ivatel nemÅ¯Å¾e hrÃ¡t, na tahu je druhÃ½ hrÃ¡Ä�!");
+            JOptionPane.showMessageDialog(Game.getWindow(), "Usted no esta en el movimiento",
+               "Ahora es el turno del segundo jugador", JOptionPane.INFORMATION_MESSAGE);
+            System.err.println("Los usuario no pueden jugar, girar al segundo jugador");
             return;
         }
         
@@ -204,7 +204,7 @@ public final class Position extends JButton {
                 
                 
                 capturingFigure.getPosition().select();
-                System.out.println("Vybranou nemuze tahnout, vybira se ta kterou muze brat - "+capturingFigure.getPosition());
+                System.out.println("El seleccionado no puede tirar, escoge el que pueda hacerlo"+capturingFigure.getPosition());
                 
             }else{
                 
@@ -245,7 +245,7 @@ public final class Position extends JButton {
                             desk.getNetLink().sendMove(desk.selected(),this);
                         }
                         catch(NetException e){
-                            System.err.println("Nezdarilo se sendMove(): "+e.toString());
+                            System.err.println("Fracaso sendMove(): "+e.toString());
                         }
                     }
                     
@@ -280,7 +280,7 @@ public final class Position extends JButton {
                             desk.getNetLink().sendMove(desk.selected(),this);
                         }
                         catch(NetException e){
-                            System.err.println("Nezdarilo se sendMove(): "+e.toString());
+                            System.err.println("Fracaso sendMove(): "+e.toString());
                         }
                     }
                     getDesk().setTempHelp(false);
@@ -306,8 +306,8 @@ public final class Position extends JButton {
                     && getDesk().getWhitePlayer().loses() && desk.getPlayer().isWhite())
             {
                 getDesk().endGame();
-                JOptionPane.showMessageDialog(Game.getWindow(), "VyhrÃ¡vÃ¡ Ä�ernÃ½ hrÃ¡Ä�. Gratuluji.",
-               "Konec hry", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(Game.getWindow(), "El jugador negro gana felicitaciones",
+               "Final del juego", JOptionPane.INFORMATION_MESSAGE);
             }
             
             if (!desk.isGameEnded()
@@ -316,8 +316,8 @@ public final class Position extends JButton {
             {
                 System.out.println("History: " + getDesk().getHistory().getCurrent());
                 getDesk().endGame();
-                JOptionPane.showMessageDialog(Game.getWindow(), "VyhrÃ¡vÃ¡ bÃ­lÃ½ hrÃ¡Ä�. Gratuluji.",
-               "Konec hry", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(Game.getWindow(), "El jugador blanco gana felicitaciones",
+               "Final del juego", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
