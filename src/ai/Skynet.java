@@ -90,13 +90,13 @@ public class Skynet extends GenericAI
         
         if (backup_fig == null || backup_pos == null)
         {
-            System.out.println("Skynet: Sakra, nemám kam sko�?it. Asi jsem poražen. Hmm...");
+            System.out.println("Skynet: No se por donde ir");
             
             return null;
         }
         
         
-        System.out.println("Skynet: Nouzový skok. Toto by se nemělo stávat příliš �?asto.");
+        System.out.println("Skynet: Salto de emergencia. Esto no deberia suceder con frencuencia");
         
         return new Move(backup_fig.getPosition(), backup_pos, false);
     }

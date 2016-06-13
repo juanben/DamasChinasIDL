@@ -5,8 +5,8 @@ package ija.projekt.base;
 
 public abstract class Figure {
     
-    private Position position; // pozice figurky
-    private Player player; // barva figurky
+    private Position position; 
+    private Player player; 
     
     
     public Figure(Position position, Player player)

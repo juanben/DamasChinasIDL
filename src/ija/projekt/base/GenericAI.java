@@ -34,7 +34,7 @@ public abstract class GenericAI
             desk.endGame();
             JOptionPane.showMessageDialog(Game.getWindow(), getName() + " byl poražen. Blahopřeji!",
                "Výhra!", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Konec hry.");
+            System.out.println("Fin del juego");
             
             desk.getWhitePlayer().settype(Player.Type.HUMAN);
             desk.getBlackPlayer().settype(Player.Type.HUMAN);

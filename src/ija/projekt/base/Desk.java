@@ -49,7 +49,7 @@ public class Desk extends JPanel {
     
     public void setHistory(History history)
     {
-        assert this.history == null : "Metodu setHistory(History) nelze volat opakovane!";
+        assert this.history == null : "El metodo historia no puede ser llamado varias veces";
         this.history = (History)history;
     }
     
