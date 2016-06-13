@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Sestavovaci skript pro projekt IJA 2013
+ Jan Kalina <xkalin03@stud.fit.vutbr.cz>
+ Michal Dobes <xdobes13@stud.fit.vutbr.cz>
+-->
+<project name="projekt" default="run" basedir=".">
+    <description>Sestavovaci pravidla projektu IJA</description>
+    
+    <target name="compile" depends="generate-build,generate-jar,generate-javadoc" />
+    
+    <target name="run" depends="generate-build,generate-jar">
+        <java classname="ija.projekt.base.Game" fork="true">
+            <classpath>
+                <path location="dest/ija2013.jar"/>
+                <!--<path location="dest/dom4j-1.6.1.jar"/>-->
+            </classpath>
+        </java>
+    </target>
+    
+    <target name="generate-build">
+        <mkdir dir="build"/>
+        <javac srcdir="src" destdir="build" encoding="UTF-8" includeantruntime="false">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+        <mkdir dir="build/ija/projekt/images"/>
+        <copy todir="build/ija/projekt/images">
+            <fileset dir="src/ija/projekt/images">
+                <include name="*.png"/>
+            </fileset>
+        </copy>
+    </target>
+    
+    <target name="generate-jar">
+        <mkdir dir="dest"/>
+        <copy file="lib/dom4j-1.6.1.jar" todir="dest" />
+        <jar jarfile="dest/ija2013.jar" basedir="build" compress="true">
+            <manifest>
+                <attribute name="Main-Class" value="ija.projekt.base.Game"/>
+                <attribute name="Class-Path" value="dom4j-1.6.1.jar"/>
+            </manifest>
+	    <!--<zipgroupfileset dir="lib" includes="*.jar" />-->
+        </jar>
+    </target>
+    
+    <target name="generate-javadoc">
+        <mkdir dir="doc"/>
+        <javadoc encoding="UTF-8" charset="UTF-8" sourcepath="src" destdir="doc" windowtitle="Projekt IJA - Dáma">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javadoc>
+    </target>
+    
+    <target name="clean">
+        <delete includeemptydirs="true">
+            <fileset dir="build" includes="**/*"/>
+            <fileset dir="dest" includes="**/*"/>
+            <fileset dir="doc" includes="**/*"/>
+        </delete>
+    </target>
+    
+</project>
