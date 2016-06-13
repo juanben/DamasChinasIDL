@@ -1,26 +1,15 @@
-/**
- * IJA - projekt 2013
- * soubor: NetConnect.java
- * Trida pro vytvoreni sitoveho pripojeni.
- * 
- * Autori:
- *         @author Michal Dobes (xdobes13)
- *         @author Jan Kalina   (xkalin03)
- */
+
 
 package ija.projekt.network;
 import java.net.*;
 import java.io.*;
-import ija.projekt.base.*;
+
 import ija.projekt.gui.NetworkDialog;
 import javax.swing.JOptionPane;
 
-/**
- * Navazovač spojení se síťovým klientem
- * (při navázání spojení vytvoří instanci NetLink)
- * @author Jan Kalina <xkalin03@stud.fit.vutbr.cz>
- * @author Michal Dobes <xdobes13@stud.fit.vutbr.cz>
- */
+import ija.projekt.base.*;
+
+
 public class NetConnect {
     
     NetLink netlink;
@@ -31,22 +20,13 @@ public class NetConnect {
     Desk desk;
     NetworkDialog dialog;
     
-    /**
-     * Konstruktor navazovače volaný z NetworkDialog
-     * @param desk Hrací plocha
-     * @param dialog NetworkDialog vyvolávající navázání spojení
-     */
+    
     public NetConnect(Desk desk, NetworkDialog dialog){
         this.desk   = desk;
         this.dialog = dialog;
     }
     
-    /**
-     * Otevření portu pro umožnění připojení jiného síťového klienta
-     * a následné čekání na připojení ve zvláštním vlákně
-     * @param port Port který bude otevřen
-     * @param white Hraje tato strana za bílé? (A síťový klient za černé?)
-     */
+    
     public void startServerThread(int port, final boolean white){
         serverPort = port;
         serverThread = new Thread() {
@@ -58,12 +38,7 @@ public class NetConnect {
         serverThread.start();
     }
     
-    /**
-     * Otevření portu pro umožnění připojení jiného síťového klienta
-     * ale s čekáním ve stávajícím vlákně
-     * @param port Port který bude otevřen
-     * @param white Hraje tato strana za bílé? (A síťový klient za černé?)
-     */
+    
     public boolean startServer(int port, boolean white){
         if(server!=null){
             stopServer();
@@ -99,9 +74,7 @@ public class NetConnect {
         return true;
     }
     
-    /**
-     * Ukončení naslouchání na portu pro umožnění připojení ze sítě
-     */
+    
     public void stopServer(){
         try{
             server.close();
@@ -112,12 +85,7 @@ public class NetConnect {
         server = null;
     }
     
-    /**
-     * Navázání spojení se serverem v síti
-     * @param hostname Adresa serveru
-     * @param port Port serveru
-     * @return Zdali se spojení zdařilo
-     */
+    
     public boolean startClient(String hostname, int port){
         if(client!=null){
             stopClient();

@@ -1,25 +1,15 @@
-/**
- * IJA - projekt 2013
- * soubor: NetLink.java
- * Implementace sitoveho spojeni
- * 
- * Autori:
- *         @author Michal Dobes (xdobes13)
- *         @author Jan Kalina   (xkalin03)
- */
+
 
 package ija.projekt.network;
 import java.net.*;
 import java.nio.ByteBuffer;
 import java.io.*;
-import ija.projekt.base.*;
+
 import javax.swing.JOptionPane;
 
-/**
- * Vlákno obsluhující spojení se síťovým klientem
- * @author Jan Kalina <xkalin03@stud.fit.vutbr.cz>
- * @author Michal Dobes <xdobes13@stud.fit.vutbr.cz>
- */
+import ija.projekt.base.*;
+
+
 public class NetLink extends Thread {
     
     private Socket socket;
@@ -30,13 +20,7 @@ public class NetLink extends Thread {
     private boolean whitePlayer = false;
     private boolean killThread = false;
     
-    /**
-     * Konstruktor obsluhujícího vlákna (volaný výhradně z NetConnect)
-     * @param socket Socket pro komunikaci s druhou stranou spojení
-     * @param desk Hrací plocha
-     * @param allowInit Povolit inicializaci druhou stranou? (true pro klienta)
-     * @param white Hraje tato strana za bílé? (A síťový klient za černé?)
-     */
+    
     NetLink(Socket socket, Desk desk, boolean allowInit, boolean white){
         this.socket = socket;
         this.desk = desk;
@@ -44,18 +28,14 @@ public class NetLink extends Thread {
         this.whitePlayer = white;
     }
     
-    /**
-     * Tělo vlákna
-     */
+    
     @Override public void run(){
         System.out.println("Pripojen klient z "+socket.toString());
         listen();
         System.out.println("Odpojen klient z "+socket.toString());
     }
     
-    /**
-     * Naslouchání druhé straně spojení
-     */
+    
     private void listen(){
         try{
             while(true){
@@ -73,8 +53,8 @@ public class NetLink extends Thread {
                     {
                         if(!allowInit){ // nepovolena inicializace
                             System.err.println("Nepovolena inicializace ze site!");
-                            JOptionPane.showMessageDialog(null, "Klient síťového spoluhráče se pokusil neoprávněně inicializovat šachovnici!",
-                               "Chyba klienta síťového spoluhráče!", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Klient sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e se pokusil neoprÃ¡vnÄ›nÄ› inicializovat Å¡achovnici!",
+                               "Chyba klienta sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e!", JOptionPane.ERROR_MESSAGE);
                             
                             // preskoceni pro ladeni s jinymi klienty
                             readSmallNumber((byte)1); // preskocit white/black
@@ -128,22 +108,20 @@ public class NetLink extends Thread {
             if(killThread){
                 afterClose();
                 JOptionPane.showMessageDialog(null,
-                        "Druhá strana ukončila síťové spojení.",
-                        "Síťová hra ukončena",
+                        "DruhÃ¡ strana ukonÄ�ila sÃ­Å¥ovÃ© spojenÃ­.",
+                        "SÃ­Å¥ovÃ¡ hra ukonÄ�ena",
                         JOptionPane.INFORMATION_MESSAGE);
             }else{
                 System.err.println(e.toString());
                 JOptionPane.showMessageDialog(null,
-                        "Došlo k chybě síťové komunikace!",
-                        "Síťová hra přerušena",
+                        "DoÅ¡lo k chybÄ› sÃ­Å¥ovÃ© komunikace!",
+                        "SÃ­Å¥ovÃ¡ hra pÅ™eruÅ¡ena",
                         JOptionPane.ERROR_MESSAGE);
             }
         }
     }
     
-    /**
-     * Příjem tahu ze sítě
-     */
+    
     private void acceptMove(byte x1, byte y1, byte x2, byte y2, boolean init){
         try{
             Position source = desk.getPositionAt(x1,y1);
@@ -152,13 +130,13 @@ public class NetLink extends Thread {
             
             if(source.getFigure() == null){
                 System.err.println("Siti vyzadovan tah z prazdneho pole! ("+x1+","+y1+")("+x2+","+y2+")");
-                JOptionPane.showMessageDialog(null, "Vyžadován tah z prázného pole!", "Chyba klienta síťového spoluhráče!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "VyÅ¾adovÃ¡n tah z prÃ¡znÃ©ho pole!", "Chyba klienta sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e!", JOptionPane.ERROR_MESSAGE);
             }else if(!init && source.getFigure().getPlayer().type() != Player.Type.REMOTE){
                 System.err.println("Siti vyzadovan tah s cizi figurkou! ("+x1+","+y1+")("+x2+","+y2+")");
-                JOptionPane.showMessageDialog(null, "Klient síťového spoluhráče se pokusil táhnout s cizí figurkou!", "Chyba klienta síťového spoluhráče!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Klient sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e se pokusil tÃ¡hnout s cizÃ­ figurkou!", "Chyba klienta sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e!", JOptionPane.ERROR_MESSAGE);
             }else if(!init && desk.getPlayer().type() != Player.Type.REMOTE){
                 System.err.println("Siti vyzadovan tah kdyz nebyla sit na tahu! ("+x1+","+y1+")("+x2+","+y2+")");
-                JOptionPane.showMessageDialog(null, "Klient síťového spoluhráče se pokusil táhnout dvakrát po sobě!", "Chyba klienta síťového spoluhráče!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Klient sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e se pokusil tÃ¡hnout dvakrÃ¡t po sobÄ›!", "Chyba klienta sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e!", JOptionPane.ERROR_MESSAGE);
             }else if(source.getFigure().canCapture(destination)){
                 source.getFigure().capture(destination);
                 desk.getHistory().addCapture(source, destination);
@@ -169,21 +147,17 @@ public class NetLink extends Thread {
                 desk.nextPlayer();
             }else{
                 System.err.println("Siti vyzadovan tah proti pravidlum! ("+x1+","+y1+")("+x2+","+y2+")");
-                JOptionPane.showMessageDialog(null, "Klient síťového spoluhráče se pokusil táhnout v rozporu s pravidly!", "Chyba klienta síťového spoluhráče!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Klient sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e se pokusil tÃ¡hnout v rozporu s pravidly!", "Chyba klienta sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e!", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(Exception e){
             System.err.println("Vyjimka pri pokusu o skok vyzadovany siti ("+x1+","+y1+")("+x2+","+y2+")");
             e.printStackTrace(System.err);
-            JOptionPane.showMessageDialog(null, "Chyba klienta síťového spoluhráče!", "Nastala vyjímka při pokusu o sítí vyžádaný skok!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Chyba klienta sÃ­Å¥ovÃ©ho spoluhrÃ¡Ä�e!", "Nastala vyjÃ­mka pÅ™i pokusu o sÃ­tÃ­ vyÅ¾Ã¡danÃ½ skok!", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    /**
-     * Odeslání obecných dat druhé straně
-     * @param buffer Odesílaná data
-     * @throws NetException Jestliže se data nepodařilo odeslat
-     */
+    
     public synchronized void send(byte[] buffer) throws NetException {
         try{
             socket.getOutputStream().write(buffer);
@@ -193,12 +167,7 @@ public class NetLink extends Thread {
         }
     }
     
-    /**
-     * Odeslání tahu druhé straně
-     * @param source Pole kde se herní kámen nachází nyní
-     * @param destination Pole kde se bude herní kámen nacházet po provedení tahu
-     * @throws NetException Jestliže se tah nepodařilo odeslat
-     */
+    
     public void sendMove(Position source, Position destination) throws NetException {
         byte[] buffer = new byte[5];
         buffer[0] = 0x01;
@@ -209,10 +178,7 @@ public class NetLink extends Thread {
         send(buffer);
     }
     
-    /**
-     * Odeslání inicializace herní plochy
-     * @throws NetException Jestliže se inicializaci nepodařilo odeslat
-     */
+    
     public void sendInit() throws NetException {
         int count = desk.getHistory().getCount();
         byte[] buffer = new byte[6+4*count];
@@ -235,12 +201,7 @@ public class NetLink extends Thread {
         send(buffer);
     }
     
-    /**
-     * Přečíst zadaný počet bytů ze sítě
-     * @param count Počet bytů
-     * @return Načtené byty
-     * @throws NetException Jestliže se načtení nezdaří
-     */
+    
     private byte[] readBytes(int count) throws NetException {
         byte[] buffer = new byte[count];
         int readed = 0;
@@ -256,21 +217,13 @@ public class NetLink extends Thread {
         return buffer;
     }
     
-    /**
-     * Přečíst 1 byte ze sítě
-     * @return Přečtený byte
-     * @throws NetException Jestliže se načtení nezdaří
-     */
+    
     private byte readByte() throws NetException {
         byte[] b = readBytes(1);
         return b[0];
     }
     
-    /**
-     * Přečíst malé (v desítkové soustavě jednociferné) číslo ze sítě
-     * Používá se pro usnadění ladění pomocí telnetu - mimo
-     * 0x01 pak server akceptuje také '1'
-     */
+    
     private byte readSmallNumber(byte maximum) throws NetException {
         assert maximum < '0' : "readSmallNumber je urcen jen ke cteni jednocifernych cisel!";
         byte b = readByte();
@@ -281,18 +234,12 @@ public class NetLink extends Thread {
         return b;
     }
     
-    /**
-     * Přečíst integer ze sítě
-     * @return Přečtený integer
-     * @throws NetException Jestliže se načtení nezdaří
-     */
+    
     private int readInteger() throws NetException {
         return ByteBuffer.wrap(readBytes(4)).getInt();
     }
     
-    /**
-     * Korektní uzavření spojení s druhou stranou
-     */
+    
     public void close(){
         killThread = true;
         try{
@@ -305,9 +252,7 @@ public class NetLink extends Thread {
         afterClose();
     }
     
-    /**
-     * Uzavření socketu
-     */
+    
     private void closeSocket(){
         killThread = true;
         try{
@@ -317,9 +262,7 @@ public class NetLink extends Thread {
         catch(Exception e){}
     }
     
-    /**
-     * Událost po uzavření spojení
-     */
+    
     private void afterClose(){
         desk.getWhitePlayer().settype(Player.Type.HUMAN);
         desk.getBlackPlayer().settype(Player.Type.HUMAN);
@@ -327,17 +270,12 @@ public class NetLink extends Thread {
         Game.getWindow().update();
     }
     
-    /**
-     * Nastavení, zdali je inicializace hrací plochy druhou stranou povolena
-     * @param allow Povolit
-     */
+    
     void setAllowInit(boolean allow){
         allowInit = allow;
     }
     
-    /**
-     * Destruktor objektu uzavírající síťové spojení
-     */
+    
     @Override protected void finalize() throws Throwable{
         this.close();
         super.finalize();

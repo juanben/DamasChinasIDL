@@ -1,9 +1,10 @@
 
 
 package ai;
-import ija.projekt.base.*;
 import java.util.ArrayList;
 import java.util.Random;
+
+import ija.projekt.base.*;
 
 
 public class Skynet extends GenericAI
