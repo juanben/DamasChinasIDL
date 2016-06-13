@@ -1,12 +1,4 @@
-/**
- * IJA - projekt 2013
- * soubor: XMLFile.java
- * Implementace vystupu do souboru ve vnitrni XML notaci.
- * 
- * Autori:
- *         @author Michal Dobes (xdobes13)
- *         @author Jan Kalina   (xkalin03)
- */
+
 
 package ija.projekt.files;
 import ija.projekt.base.History;
@@ -18,48 +10,26 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
-/**
- * Práce se souborem v XML notaci
- * @author Michal Dobes <xdobes13@stud.fit.vutbr.cz>
- * @author Jan Kalina <xkalin03@stud.fit.vutbr.cz>
- */
+
 public class XMLFile extends javax.swing.filechooser.FileFilter {
     
-    /**
-     * Je soubor s danou adresou v této notaci?
-     * @param path Adresa souboru
-     * @return Zda-li je v této notaci
-     */
+    
     public static boolean acceptable(File path){
         if (path.isDirectory()) {return true;}
         return (path.getAbsolutePath().endsWith(".xml"));
     }
     
-    /**
-     * Je soubor s danou adresou v této notaci?
-     * @param path Adresa souboru
-     * @return Zda-li je v této notaci
-     */
+    
     @Override public boolean accept(File path){
         return acceptable(path);
     }
     
-    /**
-     * Popis typu souboru ve JFileChooseru
-     * @return Popis typu
-     */
+    
     @Override public String getDescription(){
-        return "Vnitřní XML notace (*.xml)";
+        return "VnitÅ™nÃ­ XML notace (*.xml)";
     }
     
-    /**
-     * Načtení partie ze souboru
-     * @param path Adresa souboru
-     * @param history Historie tahů
-     * @throws FileNotFoundException Pokud soubor nebyl nalezen
-     * @throws IOException Při chybě čtení souboru
-     * @throws DocumentException Při chybě čtení z XML dokumentu
-     */
+    
     public static void loadFile(File path, History history)
             throws FileNotFoundException, IOException, DocumentException {
         
@@ -97,13 +67,7 @@ public class XMLFile extends javax.swing.filechooser.FileFilter {
         }
     }
     
-    /**
-     * Uložení partie do souboru
-     * @param path Adresa souboru
-     * @param history Historie tahů
-     * @throws FileNotFoundException Pokud soubor ne
-     * @throws IOException Při chybě zápisu do souboru
-     */
+    
     public static void saveFile(File path, History history)
             throws FileNotFoundException, IOException {
         FileWriter fw = new FileWriter(path);
@@ -111,7 +75,7 @@ public class XMLFile extends javax.swing.filechooser.FileFilter {
         Document doc = DocumentHelper.createDocument();
         Element root = doc.addElement("game");
         
-        // Pro každou položku v historii:
+        
         for(int i = 0; i < history.getCount(); i++)
         {
             Element newEl;
@@ -130,7 +94,7 @@ public class XMLFile extends javax.swing.filechooser.FileFilter {
             newEl.addAttribute("to_row", ""+history.getItem(i).getY2());
         }
         
-        // Pretty print:
+        
         final StringWriter sw;
 
         try {

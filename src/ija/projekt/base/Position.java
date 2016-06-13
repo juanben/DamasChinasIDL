@@ -8,15 +8,15 @@ import ija.projekt.network.*;
 
 public final class Position extends JButton {
     
-    // ikony hernich kamenu spolecne pro vsechna Position
+    
     private static ImageIcon blackIcon;
     private static ImageIcon black2Icon;
     private static ImageIcon whiteIcon;
     private static ImageIcon white2Icon;
     
-    private int x, y; // sloupec a radek pozice
-    private Desk desk; // odkaz na hraci plochu
-    private Figure figure; // kamen na teto pozici
+    private int x, y; 
+    private Desk desk; 
+    private Figure figure; 
     
     
     static {
@@ -32,9 +32,9 @@ public final class Position extends JButton {
         this.desk = desk;
         this.x = x;
         this.y = y;
-        this.figure = null; // pole je na zacatku prazdne
+        this.figure = null; 
         
-        // pri kliknuti na tlacitko pozice zavolat metodu Position.onClick()
+        
         addActionListener(new java.awt.event.ActionListener(){
           @Override public void actionPerformed(java.awt.event.ActionEvent evt){
             ((Position)evt.getSource()).onClick();
@@ -76,7 +76,7 @@ public final class Position extends JButton {
                     this.getFigure().getPlayer().type() == Player.Type.HUMAN &&
                     desk.getHistory().isPlayingHistory() == false &&
                     desk.getHistory().inPresent() &&
-                    ( // pokud s touto figurkou muze brat nebo tahnout
+                    ( 
                         this.getFigure().canCapture() ||
                         (
                             this.getFigure().canMove() &&
@@ -139,7 +139,7 @@ public final class Position extends JButton {
     public void select()
     {
         if(figure == null || figure.getPlayer() != desk.getPlayer()){
-            // Figurka tam bud neni, nebo nepatri hraci na tahu
+            
             desk.select(null);
         }else{
             desk.select(this);
@@ -172,7 +172,7 @@ public final class Position extends JButton {
             return;
         }
         
-        // Jsme vubec v soucasnosti?
+        
         if (!desk.getHistory().inPresent())
         {
             JOptionPane.showMessageDialog(Game.getWindow(), "SnaÅ¾Ã­te se zmÄ›nit historii. To nenÃ­ moÅ¾nÃ©.",
@@ -181,7 +181,7 @@ public final class Position extends JButton {
             return;
         }
         
-        // Jsme vubec na tahu?
+        
         if (desk.getPlayer().type() != Player.Type.HUMAN)
         {
             JOptionPane.showMessageDialog(Game.getWindow(), "Nejste na tahu",
@@ -193,29 +193,29 @@ public final class Position extends JButton {
         
         Figure capturingFigure = desk.getPlayer().getCaptureFigure();
         
-        // neni-li vybran zdroj a je tu figurka, bude toto zdrojem
+        
         if( desk.selected() == null && this.getFigure() != null ){
             
-            // jestlize nektera figurka muze brat, ale ne tato
+            
             if (capturingFigure != null && this.getFigure().canCapture() == false) {
                 
-                // bude pro tentokrat zobrazena napoveda
+                
                 getDesk().setTempHelp(true); 
                 
-                // zdrojovou figurkou se stane figurka kterou lze brat
+                
                 capturingFigure.getPosition().select();
                 System.out.println("Vybranou nemuze tahnout, vybira se ta kterou muze brat - "+capturingFigure.getPosition());
                 
             }else{
-                // jinak se zdrojem stane vybrane pole (patri-li figurka na nem uzivateli)
+                
                 this.select();
             }
             
-        // zdroj je jiz vybran
+        
         }else if(desk.selected()!=null && desk.selected().getFigure()!=null){
             Figure selFigure = desk.selected().getFigure();
             
-            // pokud nemuze skocit z prvniho pole na druhe, vyber se zrusi
+            
             if( (!selFigure.canMove(this) && !selFigure.canCapture(this)) && !desk.isRealHelpEnabled() ){
                 if (desk.isTempHelpEnabled())
                 {
@@ -226,17 +226,17 @@ public final class Position extends JButton {
                 
                 desk.setTempHelp(true);
                 desk.updateAllBackgrounds();
-                //desk.clearSelected();
+                
                 return;
             }
             
-            // jestlize musi brat
+            
             if (capturingFigure != null){
                 
-                // bral by pri prechodu sem
+                
                 if (selFigure.canCapture(this)){ 
                     
-                    // bere dle vyberu
+                    
                     desk.selected().getFigure().capture(this);
                     desk.getHistory().addCapture(desk.selected(), this);
                     
@@ -253,25 +253,25 @@ public final class Position extends JButton {
                     desk.nextPlayer();
                 }
                 
-                // jestlize musi ale nebere
+                
                 else if (this != desk.selected() && !(desk.isHelpEnabled())){
-                    // vybrat figurku, ktera muze brat
+                    
                     if(!selFigure.canCapture()){
                         desk.select(capturingFigure.getPosition());
                     }
-                    // jednorazove zobrazit napovedu - kam s ni muze brat
+                    
                     getDesk().setTempHelp(true);
                     getDesk().updateAllBackgrounds();
                     return;
                 }
             }
             
-            // jestlize nemusi a nemuze brat
+            
             else{
-                // Muze se figurka premistit na vybrane pole?
+                
                 if (desk.selected().getFigure().canMove(this))
                 {
-                    // Muze se premistit -> premistime
+                    
                     desk.selected().getFigure().move(this);
                     desk.getHistory().addMove(desk.selected(), this);
                     
@@ -288,7 +288,7 @@ public final class Position extends JButton {
                 }
                 else if (!getDesk().isHelpEnabled() && this != desk.selected())
                 {
-                    // Zobrazit pro tentokrat napovedu
+                    
                     getDesk().setTempHelp(true);
                     getDesk().updateAllBackgrounds();
                     return;
@@ -298,11 +298,11 @@ public final class Position extends JButton {
             getDesk().setTempHelp(false);
             
             
-            // Kontrola vyhry / prohry 
-            // Ale ne pro porazku AI, ti maji vlastni personalizovanou hlasku :-)
             
-            // Pokud hrac na tahu nema jak tahnout, prohrava.            
-            if ( !desk.isGameEnded() // Pokud je skoncena hra, hralo se s AI
+            
+            
+            
+            if ( !desk.isGameEnded() 
                     && getDesk().getWhitePlayer().loses() && desk.getPlayer().isWhite())
             {
                 getDesk().endGame();
@@ -383,7 +383,7 @@ public final class Position extends JButton {
         if (!this.isDiagonalOf(destination))
             return null;
         
-        // Inkrementace v obou osach
+        
         int xinc = ( this.x < destination.x ? 1 : -1 );
         int yinc = ( this.y < destination.y ? 1 : -1 );
         

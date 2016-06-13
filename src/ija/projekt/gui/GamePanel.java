@@ -26,7 +26,7 @@ public class GamePanel extends javax.swing.JPanel {
 
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
     private void initComponents() {
 
         desk = new Desk();
@@ -108,11 +108,11 @@ public class GamePanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void historyListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_historyListValueChanged
-        if(evt.getValueIsAdjusting() == false){ // vyber dokoncen
-            if(historyList.getSelectedIndex() != -1){ // neco je vybrano
+    private void historyListValueChanged(javax.swing.event.ListSelectionEvent evt) {
+        if(evt.getValueIsAdjusting() == false){ 
+            if(historyList.getSelectedIndex() != -1){ 
                 try{
                     history.goToHistoryItem(historyList.getSelectedIndex());
                 }
@@ -126,9 +126,9 @@ public class GamePanel extends javax.swing.JPanel {
                 }
             }
         }
-    }//GEN-LAST:event_historyListValueChanged
+    }
     
-    private void buttonPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlayActionPerformed
+    private void buttonPlayActionPerformed(java.awt.event.ActionEvent evt) {
         if(history.isPlayingHistory()){
             history.stopPlayingHistory();
         }else{
@@ -152,16 +152,16 @@ public class GamePanel extends javax.swing.JPanel {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_buttonPlayActionPerformed
+    }
 
-    private void buttonActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActionActionPerformed
+    private void buttonActionActionPerformed(java.awt.event.ActionEvent evt) {
         try{
-            // rozlozit "1. a2-b5 c3xd8" na jednotlive tahy
+            
             Scanner s = new Scanner(actionField.getText());
             while(s.hasNext()){
                 String move = s.next();
                 
-                // preskocit "1."
+                
                 if(move.charAt(0) >= '0' && move.charAt(0) <= '9'){
                     continue;
                 }
@@ -190,27 +190,27 @@ public class GamePanel extends javax.swing.JPanel {
                 "Chyba pÅ™i ruÄ�nÄ› zadanÃ©m skoku",
                 JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_buttonActionActionPerformed
+    }
     
     
     private void doAction(String move) throws Move.MoveException, DoActionException{
         
         System.out.println("doAction("+move+")");
         
-        // pokud hra jiz skoncila
+        
         if(getDesk().isGameEnded()){
             throw new DoActionException(
                  "Hra jiÅ¾ skonÄ�ila a vÃ­tÄ›zi bylo pogratulovÃ¡no.\n"+
                  "Pro novou hru zvolte Hra -> NovÃ¡ Hra.", "Nelze hrÃ¡t");
         }
 
-        // pokud jsme v historii
+        
         if(!this.getDesk().getHistory().inPresent()){
             throw new DoActionException(
                  "SnaÅ¾Ã­te se zmÄ›nit historii. To nenÃ­ moÅ¾nÃ©.", "Jste vÄ�erejÅ¡Ã­");
         }
         
-        // pokud neni uzivatel na tahu
+        
         if(this.getDesk().getPlayer().type() != Player.Type.HUMAN){
             throw new DoActionException(
                  "NynÃ­ je na tahu druhÃ½ hrÃ¡Ä�!", "Nejste na tahu");
@@ -252,7 +252,7 @@ public class GamePanel extends javax.swing.JPanel {
     }
     
     
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JTextField actionField;
     private javax.swing.JButton buttonAction;
     private javax.swing.JButton buttonPlay;
@@ -262,5 +262,5 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JTextField timerField;
-    // End of variables declaration//GEN-END:variables
+    
 }

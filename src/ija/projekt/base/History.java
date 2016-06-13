@@ -49,9 +49,9 @@ public class History extends DefaultListModel<String> {
     private void addItem(Move item){
         list.addLast(item);
         
-        if( list.size() % 2 == 1 ){ // lichy
+        if( list.size() % 2 == 1 ){ 
             super.addElement(""+(list.size()+1)/2+". "+item.toString());
-        }else{ // sudy
+        }else{ 
             super.addElement("                  "+item.toString());
         }
         setCurrent(getCount()-1);
@@ -113,7 +113,7 @@ public class History extends DefaultListModel<String> {
         }
         
         if( destinationId == currentId && !repeat ){
-            return; // jiz tam je
+            return; 
         }
         
         desk.resetDesk();

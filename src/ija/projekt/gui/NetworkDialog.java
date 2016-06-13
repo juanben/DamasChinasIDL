@@ -20,7 +20,7 @@ public class NetworkDialog extends javax.swing.JDialog {
 
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
     private void initComponents() {
 
         buttonConnect1 = new javax.swing.JButton();
@@ -52,10 +52,10 @@ public class NetworkDialog extends javax.swing.JDialog {
 
         jLabel1.setText("Port:");
 
-        jLabel2.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Cantarell", 1, 14)); 
         jLabel2.setText("UmoÅ¾nit pÅ™ipojenÃ­ jinÃ©ho hrÃ¡Ä�e k tÃ©to Å¡achovnici");
 
-        jLabel3.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Cantarell", 1, 14)); 
         jLabel3.setText("PÅ™ipojit se k jinÃ©mu hrÃ¡Ä�i");
 
         textOutHost.setText("localhost");
@@ -157,23 +157,23 @@ public class NetworkDialog extends javax.swing.JDialog {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void buttonConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConnectActionPerformed
+    private void buttonConnectActionPerformed(java.awt.event.ActionEvent evt) {
         netconnect.startClient(textOutHost.getText(),Integer.parseInt(textOutPort.getText()));
-    }//GEN-LAST:event_buttonConnectActionPerformed
+    }
 
-    private void buttonConnect1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConnect1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonConnect1ActionPerformed
+    private void buttonConnect1ActionPerformed(java.awt.event.ActionEvent evt) {
+        
+    }
 
-    private void buttonAllowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAllowActionPerformed
+    private void buttonAllowActionPerformed(java.awt.event.ActionEvent evt) {
         buttonAllow.setEnabled(false);
         buttonConnect.setEnabled(false);
         netconnect.startServerThread(Integer.parseInt(textInPort.getText()), RB_white.isSelected());
-    }//GEN-LAST:event_buttonAllowActionPerformed
+    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JRadioButton RB_white;
     private javax.swing.ButtonGroup RG_color;
     private javax.swing.JButton buttonAllow;
@@ -189,5 +189,5 @@ public class NetworkDialog extends javax.swing.JDialog {
     private javax.swing.JTextField textInPort;
     private javax.swing.JTextField textOutHost;
     private javax.swing.JTextField textOutPort;
-    // End of variables declaration//GEN-END:variables
+    
 }

@@ -25,7 +25,7 @@ public class GameWindow extends javax.swing.JFrame {
     
     public final void newTab(){
         maxTabNumber++;
-        tabs.addTab("Hra "+maxTabNumber, new GamePanel()); // novy JTabbedPane
+        tabs.addTab("Hra "+maxTabNumber, new GamePanel()); 
         tabs.setSelectedIndex( tabs.getTabCount()-1 );
     }
     
@@ -38,7 +38,7 @@ public class GameWindow extends javax.swing.JFrame {
         
         if(tabs.getTabCount() > 1){
             tabs.removeTabAt(tabs.getSelectedIndex());
-        }else{ // posledni tab, ukoncit celou aplikaci
+        }else{ 
             System.exit(0);
         }
     }
@@ -50,7 +50,7 @@ public class GameWindow extends javax.swing.JFrame {
 
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
     private void initComponents()
     {
 
@@ -219,52 +219,52 @@ public class GameWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void menuItemNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNewGameActionPerformed
+    private void menuItemNewGameActionPerformed(java.awt.event.ActionEvent evt) {
         newTab();
-    }//GEN-LAST:event_menuItemNewGameActionPerformed
+    }
 
-    private void menuItemExitGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExitGameActionPerformed
+    private void menuItemExitGameActionPerformed(java.awt.event.ActionEvent evt) {
         closeCurrentTab();
-    }//GEN-LAST:event_menuItemExitGameActionPerformed
+    }
 
-    private void menuItemNetworkGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemNetworkGameActionPerformed
+    private void menuItemNetworkGameActionPerformed(java.awt.event.ActionEvent evt) {
         NetworkDialog ng = new NetworkDialog(this,false,getDesk());
         ng.setVisible(true);
-    }//GEN-LAST:event_menuItemNetworkGameActionPerformed
+    }
 
-    private void menuItemHelpEnabledActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemHelpEnabledActionPerformed
+    private void menuItemHelpEnabledActionPerformed(java.awt.event.ActionEvent evt) {
         getDesk().setHelpEnabled(menuItemHelpEnabled.getState());
         getDesk().updateAllBackgrounds();
-    }//GEN-LAST:event_menuItemHelpEnabledActionPerformed
+    }
 
-    private void tabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsStateChanged
-        // Pri zmene vybrane zalozky
+    private void tabsStateChanged(javax.swing.event.ChangeEvent evt) {
+        
         menuItemHelpEnabled.setState(getDesk().isHelpEnabled());
         menuItemCancelNetwork.setEnabled(getDesk().getNetLink() != null);
         menuItemCancelAI.setEnabled(getDesk().isAIEnabled());
-    }//GEN-LAST:event_tabsStateChanged
+    }
 
-    // Prepocitani menu na zadost...
+    
     public void update()
     {
         tabsStateChanged(null);
     }
     
     public File getExamplesFolder(){
-        // "JAR/../../examples"
+        
         File folder = new File(GameWindow.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         folder = new File(folder.getParentFile().getParentFile(),"examples");
         if(!folder.isDirectory()){
-            // neni-li slozka nalezena vuci jaru, je pouzita vuci pracovnimu adresari (NetBeans)
+            
             folder = new File("examples");
         }
         System.out.println(folder.getAbsolutePath());
         return folder;
     }
     
-    private void menuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSaveActionPerformed
+    private void menuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {
         
         JFileChooser fileDialog = new JFileChooser(getExamplesFolder());
         fileDialog.setAcceptAllFileFilterUsed(false);
@@ -296,9 +296,9 @@ public class GameWindow extends javax.swing.JFrame {
                         "Chyba pÅ™i uklÃ¡dÃ¡nÃ­", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_menuItemSaveActionPerformed
+    }
 
-    private void menuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOpenActionPerformed
+    private void menuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {
         
         JFileChooser fileDialog = new JFileChooser(getExamplesFolder());
         fileDialog.setAcceptAllFileFilterUsed(false);
@@ -318,16 +318,16 @@ public class GameWindow extends javax.swing.JFrame {
                     return;
                 }
                 
-                // Do historie nacteno, ted promitnout na hraci plochu:
+                
                 getDesk().getHistory().goToPresent();
                 
-                // Zjistit, kdo ma byt na tahu:
+                
                 if ( (getDesk().getHistory().getCount() % 2 == 0) != getDesk().getPlayer().isWhite())
                 {
                     getDesk().nextPlayer();
                 }
 
-                // Zablokovat hru, pokud nektery z hracu vyhral...
+                
                 if ( getDesk().getHistory().getCurrent() > 1 && 
                         (getDesk().getWhitePlayer().loses() && getDesk().getPlayer().isWhite() 
                         || getDesk().getBlackPlayer().loses() && getDesk().getPlayer().isBlack()))
@@ -340,20 +340,20 @@ public class GameWindow extends javax.swing.JFrame {
                         "Chyba pÅ™i otevÃ­rÃ¡nÃ­", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_menuItemOpenActionPerformed
+    }
 
-    private void menuItemUIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemUIActionPerformed
+    private void menuItemUIActionPerformed(java.awt.event.ActionEvent evt) {
         AIDialog aid = new AIDialog(this,false,getDesk());
         aid.setVisible(true);
-    }//GEN-LAST:event_menuItemUIActionPerformed
+    }
 
-    private void menuItemCancelNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCancelNetworkActionPerformed
+    private void menuItemCancelNetworkActionPerformed(java.awt.event.ActionEvent evt) {
         this.getDesk().getNetLink().close();
-        // prenastaveni sachovnice provede Netlink.afterClose()
-    }//GEN-LAST:event_menuItemCancelNetworkActionPerformed
+        
+    }
 
-    private void menuItemCancelAIActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuItemCancelAIActionPerformed
-    {//GEN-HEADEREND:event_menuItemCancelAIActionPerformed
+    private void menuItemCancelAIActionPerformed(java.awt.event.ActionEvent evt)
+    {
         if (getDesk().getWhitePlayer().type() == Player.Type.AI)
         {
             getDesk().getWhitePlayer().settype(Player.Type.HUMAN);
@@ -364,15 +364,15 @@ public class GameWindow extends javax.swing.JFrame {
         {
             getDesk().getBlackPlayer().settype(Player.Type.HUMAN);
         }
-    }//GEN-LAST:event_menuItemCancelAIActionPerformed
+    }
 
-    private void showMovesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_showMovesActionPerformed
-    {//GEN-HEADEREND:event_showMovesActionPerformed
+    private void showMovesActionPerformed(java.awt.event.ActionEvent evt)
+    {
         AvailableMoves am = new AvailableMoves(getDesk());
         am.setVisible(true);
-    }//GEN-LAST:event_showMovesActionPerformed
+    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuGame;
     private javax.swing.JMenuItem jMenuItem1;
@@ -390,5 +390,5 @@ public class GameWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemUI;
     private javax.swing.JMenuItem showMoves;
     private javax.swing.JTabbedPane tabs;
-    // End of variables declaration//GEN-END:variables
+    
 }

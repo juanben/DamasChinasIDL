@@ -27,7 +27,7 @@ public abstract class GenericAI
     
     public void makeMove()
     {
-        // Ziskat tah, provest ho a pridat do historie
+        
         Move m = getMove();
         if (m == null)
         {
@@ -35,10 +35,10 @@ public abstract class GenericAI
             JOptionPane.showMessageDialog(Game.getWindow(), getName() + " byl poražen. Blahopřeji!",
                "Výhra!", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("Konec hry.");
-            // Odnastavit AI:
+            
             desk.getWhitePlayer().settype(Player.Type.HUMAN);
             desk.getBlackPlayer().settype(Player.Type.HUMAN);
-            Game.getWindow().update(); // aby se zmena projevila v UI
+            Game.getWindow().update(); 
             return;
         }
         

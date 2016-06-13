@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/ija/projekt/base/Player.java=UTF-8
 encoding//src/ija/projekt/base/Position.java=UTF-8
+encoding//src/ija/projekt/files/TxtFile.java=UTF-8
+encoding//src/ija/projekt/files/XMLFile.java=UTF-8
 encoding//src/ija/projekt/gui/AIDialog.java=UTF-8
 encoding//src/ija/projekt/gui/GamePanel.java=UTF-8
 encoding//src/ija/projekt/gui/GameWindow.java=UTF-8

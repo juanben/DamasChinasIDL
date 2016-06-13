@@ -7,11 +7,11 @@ import ija.projekt.network.*;
 
 public class Desk extends JPanel {
     
-    private Position positions[][]; // [ x=sloupec: 0-7 ] [ y=radek: 0-7 ]
-    private Position selected = null; // aktualne vybrana (zluta) pozice
-    private Player playerWhite, playerBlack; // hraci
-    private Player player; // hrac ktery je prave na rade
-    private History history; // seznam provedenych tahu
+    private Position positions[][]; 
+    private Position selected = null; 
+    private Player playerWhite, playerBlack; 
+    private Player player; 
+    private History history; 
     
     private boolean helpEnabled;
     private boolean helpOnce = false;
@@ -23,7 +23,7 @@ public class Desk extends JPanel {
     
     public Desk()
     {
-        // Inicializace hracu
+        
         playerWhite = new Player(Player.Color.WHITE);
         playerBlack = new Player(Player.Color.BLACK);
         playerWhite.setOpponent(playerBlack);
@@ -32,13 +32,13 @@ public class Desk extends JPanel {
         playerWhite.settype(Player.Type.HUMAN);
         playerBlack.settype(Player.Type.HUMAN);
         
-        // Inicializace jednotlivych pozic herni plochy tak,
-        // aby se pole vykreslila ve spravnem poradi
+        
+        
         positions = new Position[8][8];
         for( int y=7 ; y>=0 ; y-- ){
             for( int x=0 ; x<=7 ; x++ ){
                 positions[x][y] = new Position(this,x,y);
-                //positions[x][y].setText(x+""+y+"-"+positions[x][y].toString()); // DEBUG
+                
                 add(positions[x][y]);
             }
         }

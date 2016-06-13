@@ -64,7 +64,7 @@ public class Move {
         if (desk == null) {
             throw new MoveException("Desk je null!");
         }
-        // samotna konverze
+        
         source = desk.getPositionAt((int) s.charAt(0) - 'a', (int) s.charAt(1) - '1');
         capture = (s.charAt(2) == 'x');
         destination = desk.getPositionAt((int) s.charAt(3) - 'a', (int) s.charAt(4) - '1');

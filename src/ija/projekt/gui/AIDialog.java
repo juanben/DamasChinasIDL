@@ -18,7 +18,7 @@ public class AIDialog extends javax.swing.JDialog {
 
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
     private void initComponents()
     {
 
@@ -109,28 +109,28 @@ public class AIDialog extends javax.swing.JDialog {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_confirmButtonActionPerformed
-    {//GEN-HEADEREND:event_confirmButtonActionPerformed
-        // Za ktereho hrace dosazujeme AI?
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        
         Player aiPlayer = RB_white.isSelected() ? desk.getWhitePlayer() : desk.getBlackPlayer();
         GenericAI aiLogic = null;
         
-        // Pokud bychom timto odstrelili vzdaleneho hrace, projistotu se zaptame
+        
         if (aiPlayer.type() == Player.Type.REMOTE)
         {
             int answer = JOptionPane.showConfirmDialog(rootPane, "Za tohoto hrÃ¡Ä�e jiÅ¾ hraje vzdÃ¡lenÃ½ hrÃ¡Ä�.\nPÅ™ejete si ukonÄ�it spojenÃ­?", "Pozor", JOptionPane.YES_NO_OPTION);
             
             if(answer == JOptionPane.YES_OPTION){
-                desk.getNetLink().close(); // Korektne ukoncime spojeni
+                desk.getNetLink().close(); 
                 desk.setNetLink(null);
             }else{
                 return;
             }
         }
         
-        // Proti komu chceme hrat?
+        
         if (RB_Skynet.isSelected())
         {
             aiLogic = new Skynet(aiPlayer, desk);
@@ -139,7 +139,7 @@ public class AIDialog extends javax.swing.JDialog {
         aiPlayer.setAI(aiLogic);
         Game.getWindow().update();
         
-        // pokud je zrovna ten hrac na tahu, musime za nej udelat tah...
+        
         if (desk.getPlayer() == aiPlayer && !desk.isGameEnded())
         {
             aiPlayer.getAI().makeMove();
@@ -148,9 +148,9 @@ public class AIDialog extends javax.swing.JDialog {
         
         this.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_confirmButtonActionPerformed
+    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JRadioButton RB_Skynet;
     private javax.swing.JRadioButton RB_black;
     private javax.swing.JRadioButton RB_white;
@@ -160,5 +160,5 @@ public class AIDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    // End of variables declaration//GEN-END:variables
+    
 }

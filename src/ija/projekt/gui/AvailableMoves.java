@@ -24,7 +24,7 @@ public class AvailableMoves extends javax.swing.JFrame
 
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
     private void initComponents()
     {
 
@@ -91,12 +91,12 @@ public class AvailableMoves extends javax.swing.JFrame
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void buttonMoveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_buttonMoveActionPerformed
-    {//GEN-HEADEREND:event_buttonMoveActionPerformed
+    private void buttonMoveActionPerformed(java.awt.event.ActionEvent evt)
+    {
         if (movesList.getSelectedIndex() == -1)
-            return; // Uzivatel nic nevybral
+            return; 
         
         int index = movesList.getSelectedIndex();
         
@@ -104,29 +104,29 @@ public class AvailableMoves extends javax.swing.JFrame
         moves.get(index).getDestination().onClick();
         
         this.setVisible(false);
-    }//GEN-LAST:event_buttonMoveActionPerformed
+    }
 
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowGainedFocus
-    {//GEN-HEADEREND:event_formWindowGainedFocus
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt)
+    {
                 DefaultListModel<String> model = new DefaultListModel<>();
         
-        // pokud hra jiz skoncila
+        
         if(desk.isGameEnded()){
             return;
         }
 
-        // pokud jsme v historii
+        
         if(!desk.getHistory().inPresent()){
             return;
         }
         
-        // pokud neni uzivatel na tahu
+        
         if(desk.getPlayer().type() != Player.Type.HUMAN){
             return;
         }
         
                                                       
-        // Zobrazit varianty následujícího tahu:
+        
         boolean capture = false;
         moves = new ArrayList<>();
         
@@ -172,20 +172,20 @@ public class AvailableMoves extends javax.swing.JFrame
                 }
         }
         
-        // Zobrazit skoky
+        
         for (Move m : moves)
         {
             model.addElement(m.toString());
         }
         
         movesList.setModel(model);
-    }//GEN-LAST:event_formWindowGainedFocus
+    }
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    
     private javax.swing.JButton buttonMove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList movesList;
-    // End of variables declaration//GEN-END:variables
+    
 }

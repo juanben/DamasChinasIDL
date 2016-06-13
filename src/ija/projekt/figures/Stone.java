@@ -15,13 +15,13 @@ public class Stone extends Figure {
     
     @Override public boolean canMove(Position destination)
     {
-        if (destination.getFigure() != null) // Na cilovem policku uz nekdo je
+        if (destination.getFigure() != null) 
             return false;
         
         int direction = ( getPosition().getDesk().getPlayer().isWhite() ? 1 : -1 );
         
-        if(getPosition().nextPosition( 1, direction) == destination) return true; // O 1 vpravo
-        if(getPosition().nextPosition(-1, direction) == destination) return true; // O 1 vlevo
+        if(getPosition().nextPosition( 1, direction) == destination) return true; 
+        if(getPosition().nextPosition(-1, direction) == destination) return true; 
         return false;
     }
     
@@ -30,7 +30,7 @@ public class Stone extends Figure {
     {
         int direction = ( getPosition().getDesk().getPlayer().isWhite() ? 1 : -1 );
         
-        // Pole pozic na ktere se odtud muzeme presunout
+        
         Position[] destinations = new Position[2];
         destinations[0] = getPosition().nextPosition( 2, 2*direction);
         destinations[1] = getPosition().nextPosition(-2, 2*direction);
@@ -46,24 +46,24 @@ public class Stone extends Figure {
     
     @Override public boolean canCapture(Position destination)
     {
-        if (destination == null) return false; // cilove pole neexistuje
-        if (destination.getFigure() != null) return false; // cilove pole obsazene
+        if (destination == null) return false; 
+        if (destination.getFigure() != null) return false; 
         
         int direction = ( getPosition().getDesk().getPlayer().isWhite() ? 1 : -1 );
         
-        for (int side = -1; side < 2; side += 2) // Jednou vpravo, jednou vlevo
+        for (int side = -1; side < 2; side += 2) 
         {
             if (getPosition().nextPosition(2*side, 2*direction) == destination)
             {
-                // preskakovana, tedy vyhazovana, figurka
+                
                 Figure jumpedFig = getPosition().nextPosition(1*side, direction).getFigure();
                 
                 if ( jumpedFig == null )
-                    return false; // Neskaceme pres zadnou figurku
+                    return false; 
                 else if ( jumpedFig.getPlayer() == this.getPlayer() )
-                    return false; // Skaceme pres vlastni figurku
+                    return false; 
                 else
-                    return true; // Skaceme pres cizi figurku - muzeme ji vyhodit
+                    return true; 
             }
         }
         return false;
@@ -72,16 +72,16 @@ public class Stone extends Figure {
     
     @Override public void capture(Position destination)
     {
-        // Vyhozeni
+        
         Position stoneInWayPos = getPosition().getFirstStoneInWay(destination);
         if(stoneInWayPos == null)
-            return; // TODO raise exception???
+            return; 
         
         stoneInWayPos.getFigure().getPlayer().remFigure(stoneInWayPos.getFigure());
         stoneInWayPos.removeFigure();
         stoneInWayPos.updateIcon();
         
-        // Presun
+        
         move(destination);
     }
 }
