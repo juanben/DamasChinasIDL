@@ -27,24 +27,24 @@ public class Player {
     private GenericAI ai = null;
     
     /**
-     * Nastavení hráče protivníka
-     * @param p protivník
+     * NastavenÃ­ hrÃ¡Ä�e protivnÃ­ka
+     * @param p protivnÃ­k
      */
     public void setOpponent(Player p){
         opponent = p;
     }
     
     /**
-     * Hráč protivník
-     * @return protivník
+     * HrÃ¡Ä� protivnÃ­k
+     * @return protivnÃ­k
      */
     public Player opponent(){
         return opponent;
     }
     
     /**
-     * Konstruktor hráče
-     * @param color barva za kterou hráč hraje
+     * Konstruktor hrÃ¡Ä�e
+     * @param color barva za kterou hrÃ¡Ä� hraje
      */
     public Player(Color color){
         this.color = color;
@@ -52,24 +52,24 @@ public class Player {
     }
     
     /**
-     * Hraje za bílou barvu?
-     * @return Zdali hráč hraje za bílou barvu
+     * Hraje za bÃ­lou barvu?
+     * @return Zdali hrÃ¡Ä� hraje za bÃ­lou barvu
      */
     public boolean isWhite(){
         return (color==Color.WHITE);
     }
     
     /**
-     * Hraje za černou barvu?
-     * @return Zdali hráč hraje za černou barvu
+     * Hraje za Ä�ernou barvu?
+     * @return Zdali hrÃ¡Ä� hraje za Ä�ernou barvu
      */
     public boolean isBlack(){
         return (color==Color.BLACK);
     }
     
     /**
-     * Nastavení typu hráče
-     * @param newtype typ hráče
+     * NastavenÃ­ typu hrÃ¡Ä�e
+     * @param newtype typ hrÃ¡Ä�e
      */
     public void settype(Type newtype)
     {
@@ -77,8 +77,8 @@ public class Player {
     }
     
     /**
-     * Typ hráče
-     * @return typ hráče
+     * Typ hrÃ¡Ä�e
+     * @return typ hrÃ¡Ä�e
      */
     public Type type()
     {
@@ -86,7 +86,7 @@ public class Player {
     }
     
     /**
-     * Přidání figurky do seznamu figurek hráče
+     * PÅ™idÃ¡nÃ­ figurky do seznamu figurek hrÃ¡Ä�e
      * @param newfig figurka
      */
     public void addFigure(Figure newfig)
@@ -95,8 +95,8 @@ public class Player {
     }
     
     /**
-     * Odebrání figurky ze seznamu figurek hráče
-     * @param delfig figurka k odebrání
+     * OdebrÃ¡nÃ­ figurky ze seznamu figurek hrÃ¡Ä�e
+     * @param delfig figurka k odebrÃ¡nÃ­
      */
     public void remFigure(Figure delfig)
     {
@@ -104,7 +104,7 @@ public class Player {
     }
     
     /**
-     * Vyprázdnění seznamu figurek hráče
+     * VyprÃ¡zdnÄ›nÃ­ seznamu figurek hrÃ¡Ä�e
      */
     public void purgeFigures()
     {
@@ -112,8 +112,8 @@ public class Player {
     }
     
     /**
-     * Získání počtu figurek hráče
-     * @return počet figurek hráče
+     * ZÃ­skÃ¡nÃ­ poÄ�tu figurek hrÃ¡Ä�e
+     * @return poÄ�et figurek hrÃ¡Ä�e
      */
     public Integer cntFigures()
     {
@@ -121,8 +121,8 @@ public class Player {
     }
     
     /**
-     * Získání seznamu figurek hráče (např. pro foreach)
-     * @return seznam figurek hráče
+     * ZÃ­skÃ¡nÃ­ seznamu figurek hrÃ¡Ä�e (napÅ™. pro foreach)
+     * @return seznam figurek hrÃ¡Ä�e
      */
     public ArrayList<Figure> getFigures()
     {
@@ -130,8 +130,8 @@ public class Player {
     }
     
     /**
-     * Nastavení umělé inteligence hrající za hráče
-     * @param newAI typ umělé inteligence
+     * NastavenÃ­ umÄ›lÃ© inteligence hrajÃ­cÃ­ za hrÃ¡Ä�e
+     * @param newAI typ umÄ›lÃ© inteligence
      */
     public void setAI(GenericAI newAI)
     {
@@ -139,8 +139,8 @@ public class Player {
     }
     
     /**
-     * Získání typu umělé inteligence hrající za hráče
-     * @return typ umělé inteligence
+     * ZÃ­skÃ¡nÃ­ typu umÄ›lÃ© inteligence hrajÃ­cÃ­ za hrÃ¡Ä�e
+     * @return typ umÄ›lÃ© inteligence
      */
     public GenericAI getAI()
     {
@@ -148,8 +148,8 @@ public class Player {
     }
     
     /**
-     * Zdali je hráč zablokovaný - nemůže s ničím nikam táhnout
-     * @return zdali je hráč zablokovaný (prohrál)
+     * Zdali je hrÃ¡Ä� zablokovanÃ½ - nemÅ¯Å¾e s niÄ�Ã­m nikam tÃ¡hnout
+     * @return zdali je hrÃ¡Ä� zablokovanÃ½ (prohrÃ¡l)
      */
     public boolean isBlocked()
     {
@@ -179,8 +179,8 @@ public class Player {
     }
     
     /**
-     * Zjistí, jestli hráč prohrál
-     * @return true pokud hráč prohrál, jinak false
+     * ZjistÃ­, jestli hrÃ¡Ä� prohrÃ¡l
+     * @return true pokud hrÃ¡Ä� prohrÃ¡l, jinak false
      */
     public boolean loses()
     {
@@ -188,8 +188,8 @@ public class Player {
     }
     
     /**
-     * Získání figurky která může brát
-     * @return figurka která může brát nebo null
+     * ZÃ­skÃ¡nÃ­ figurky kterÃ¡ mÅ¯Å¾e brÃ¡t
+     * @return figurka kterÃ¡ mÅ¯Å¾e brÃ¡t nebo null
      */
     public Figure getCaptureFigure()
     {
@@ -204,9 +204,9 @@ public class Player {
     }
     
     /**
-     * Jestli mají hráči stejnou barvu
-     * @param o jiný hráč
-     * @return zdali mají stejnou barvu
+     * Jestli majÃ­ hrÃ¡Ä�i stejnou barvu
+     * @param o jinÃ½ hrÃ¡Ä�
+     * @return zdali majÃ­ stejnou barvu
      */
     @Override public boolean equals(Object o)
     {
@@ -219,7 +219,7 @@ public class Player {
     }
     
     /**
-     * Hash pozice pro umožnění použití HashMapy
+     * Hash pozice pro umoÅ¾nÄ›nÃ­ pouÅ¾itÃ­ HashMapy
      */
     @Override public int hashCode()
     {

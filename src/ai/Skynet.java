@@ -1,42 +1,23 @@
-/**
- * IJA - projekt 2013
- * soubor: Skynet.java
- * Implementace umele inteligence
- * 
- * Autori:
- *         @author Michal Dobes (xdobes13)
- *         @author Jan Kalina   (xkalin03)
- */
 
-package ija.projekt.ais;
+
+package ai;
 import ija.projekt.base.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Umela inteligence zalozena na nahode
- * @author Jan Kalina <xkalin03@stud.fit.vutbr.cz>
- * @author Michal Dobes <xdobes13@stud.fit.vutbr.cz>
- */
+
 public class Skynet extends GenericAI
 {
     Random rand;
     
-     /**
-     * Konstruktor
-     * @param myplayer Za kterého hráče se má AI dosadit
-     * @param mydesk v rámci které desky
-     */
+     
     public Skynet(Player myplayer, Desk mydesk)
     {
         super(myplayer, mydesk);
         rand = new Random();
     }
     
-    /**
-     * Vypočítá další tah
-     * @return Move pohyb, ktery se ma vykonat
-     */
+    
     @Override
     public Move getMove()
     {
@@ -108,22 +89,19 @@ public class Skynet extends GenericAI
         
         if (backup_fig == null || backup_pos == null)
         {
-            System.out.println("Skynet: Sakra, nemám kam skočit. Asi jsem poražen. Hmm...");
+            System.out.println("Skynet: Sakra, nemám kam sko�?it. Asi jsem poražen. Hmm...");
             // ukonceni hry s vrelymi gratulacemi uzivateli
             return null;
         }
         
         // Nouzovy skok:
-        System.out.println("Skynet: Nouzový skok. Toto by se nemělo stávat příliš často.");
+        System.out.println("Skynet: Nouzový skok. Toto by se nemělo stávat příliš �?asto.");
         
         return new Move(backup_fig.getPosition(), backup_pos, false);
     }
     
 
-    /**
-     * Vrátí jméno AI
-     * @return Jméno AI
-     */
+    
     @Override
     public String getName()
     {

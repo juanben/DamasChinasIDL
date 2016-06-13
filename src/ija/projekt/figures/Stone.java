@@ -1,37 +1,18 @@
-/**
- * IJA - projekt 2013
- * soubor: Stone.java
- * Implementace zakladniho kamene.
- * 
- * Autori:
- *         @author Michal Dobes (xdobes13)
- *         @author Jan Kalina   (xkalin03)
- */
+
 
 package ija.projekt.figures;
 import ija.projekt.base.*;
 
-/**
- * Hraci kamen Kamen
- * @author Jan Kalina <xkalin03@stud.fit.vutbr.cz>
- * @author Michal Dobes <xdobes13@stud.fit.vutbr.cz>
- */
+
 public class Stone extends Figure {
     
-    /**
-     * Konstruktor hracího kamene
-     * @param position Pozice na které kámen leží
-     * @param player Hráč kterému kámen patří
-     */
+    
     public Stone(Position position, Player player)
     {
         super(position, player);
     }
     
-    /**
-     * Může se kámen posunout na danou pozici? (bez braní cizí figurky)
-     * @param destination Cílová pozice kamene
-     */
+    
     @Override public boolean canMove(Position destination)
     {
         if (destination.getFigure() != null) // Na cilovem policku uz nekdo je
@@ -44,9 +25,7 @@ public class Stone extends Figure {
         return false;
     }
     
-    /**
-     * Může kámen vzít nějakou cizí figurku?
-     */
+    
     @Override public boolean canCapture()
     {
         int direction = ( getPosition().getDesk().getPlayer().isWhite() ? 1 : -1 );
@@ -64,10 +43,7 @@ public class Stone extends Figure {
         return false;
     }
 
-    /**
-     * Může se kámen posunout na danou a vzít při tom cizí figurku?
-     * @param destination Cílová pozice kamene
-     */
+    
     @Override public boolean canCapture(Position destination)
     {
         if (destination == null) return false; // cilove pole neexistuje
@@ -93,11 +69,7 @@ public class Stone extends Figure {
         return false;
     }
     
-    /**
-     * Přesun figurky s vyhozením cizí figurky
-     * Nejprve je třeba ověřit tah pomocí canCapture(destination)
-     * @param destination Cílová pozice
-     */
+    
     @Override public void capture(Position destination)
     {
         // Vyhozeni

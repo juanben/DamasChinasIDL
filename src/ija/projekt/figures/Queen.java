@@ -1,37 +1,18 @@
-/**
- * IJA - projekt 2013
- * soubor: Queen.java
- * Implementace herniho kamene damy.
- * 
- * Autori:
- *         @author Michal Dobes (xdobes13)
- *         @author Jan Kalina   (xkalin03)
- */
+
 
 package ija.projekt.figures;
 import ija.projekt.base.*;
 
-/**
- * Hraci kamen Dama
- * @author Jan Kalina <xkalin03@stud.fit.vutbr.cz>
- * @author Michal Dobes <xdobes13@stud.fit.vutbr.cz>
- */
+
 public class Queen extends Figure {
     
-    /**
-     * Konstruktor dámy
-     * @param ps Pozice na které dáma leží
-     * @param pl Hráč kterému dáma patří
-     */
+    
     public Queen(Position ps, Player pl)
     {
         super(ps, pl);
     }
     
-    /**
-     * Může se dáma posunout na danou pozici? (bez braní cizí figurky)
-     * @param destination Cílová pozice dámy
-     */
+    
     @Override public boolean canMove(Position destination)
     {
         if (destination.getFigure() != null) // Na cilovem policku uz nekdo je
@@ -43,9 +24,7 @@ public class Queen extends Figure {
         return getPosition().isDiagonalOf(destination);
     }
     
-    /**
-     * Může dáma vzít nějakou cizí figurku?
-     */
+    
     @Override public boolean canCapture()
     {
         // Musim volat canCapture(Position p) na vsechna pole na diagovalach
@@ -69,10 +48,7 @@ public class Queen extends Figure {
         return false;
     }
 
-    /**
-     * Může se dáma posunout na danou pozici a vzít při tom cizí figurku?
-     * @param destination Cílová pozice dámy
-     */
+    
     @Override public boolean canCapture(Position destination)
     {
         // Je cilove policko volne?
@@ -106,11 +82,7 @@ public class Queen extends Figure {
         return opponentStones == 1; // 1 kamen
     }
     
-    /**
-     * Přesun figurky s vyhozením cizí figurky
-     * Nejprve je třeba ověřit tah pomocí canCapture(destination)
-     * @param destination Cílová pozice
-     */
+    
     @Override public void capture(Position destination)
     {
         // Vyhozeni vsech protihracovych kamenu v ceste.

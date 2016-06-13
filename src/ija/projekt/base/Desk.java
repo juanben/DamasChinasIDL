@@ -1,23 +1,10 @@
-/**
- * IJA - projekt 2013
- * soubor: Desk.java
- * Implementace hraci desky
- * 
- * Autori:
- *         @author Michal Dobes (xdobes13)
- *         @author Jan Kalina   (xkalin03)
- */
+
 
 package ija.projekt.base;
 import javax.swing.*;
 import ija.projekt.network.*;
 
-/**
- * Hraci plocha
- * (obsahuje 64 pozic)
- * @author Jan Kalina <xkalin03@stud.fit.vutbr.cz>
- * @author Michal Dobes <xdobes13@stud.fit.vutbr.cz>
- */
+
 public class Desk extends JPanel {
     
     private Position positions[][]; // [ x=sloupec: 0-7 ] [ y=radek: 0-7 ]
@@ -33,9 +20,7 @@ public class Desk extends JPanel {
     
     private boolean gameEnded = false;
     
-    /**
-     * Konstruktor
-     */
+    
     public Desk()
     {
         // Inicializace hracu
@@ -61,83 +46,55 @@ public class Desk extends JPanel {
         helpEnabled = false;
     }
     
-    /**
-     * Přiřadí desce historii
-     * @param history objekt historie
-     */
+    
     public void setHistory(History history)
     {
         assert this.history == null : "Metodu setHistory(History) nelze volat opakovane!";
         this.history = (History)history;
     }
     
-    /**
-     * Získá hisorii
-     * @return objekt historie
-     */
+    
     public History getHistory()
     {
         return history;
     }
     
-    /**
-     * Ověří, jestli na desce hraje umělá inteligence
-     * @return bool jestli je na desce AI
-     */
+    
     public boolean isAIEnabled()
     {
         return ( getWhitePlayer().type() == Player.Type.AI 
                 || getBlackPlayer().type() == Player.Type.AI);
     }
     
-    /**
-     * Zjistí, jestli je vyžadována nápověda
-     * @return bool true pokud je vyžadována nápověda
-     */
+    
     public boolean isHelpEnabled(){
         return helpEnabled || helpOnce;
     }
     
-    /**
-     * Nastaví dočasnou (tj. automatickou) nápovědu
-     * @param val true -> zapnout, false -> vypnout
-     */
+    
     public void setTempHelp(boolean val)
     {
         helpOnce = val;
     }
     
-    /**
-     * Zjistí, jetsli je aktivována dočasná (automatická) nápověda
-     * @return true pokuj e aktivovaná dočasná (automatická) nápověda
-     */
+    
     public boolean isTempHelpEnabled()
     {
         return helpOnce;
     }
     
-    /**
-     * Zjistí, jestli je aktivovaná trvalá nápověda
-     * @return true pokud ano, jinak false
-     */
+    
     public boolean isRealHelpEnabled()
     {
         return helpEnabled;
     }
     
-    /**
-     * Nastaví trvalou nápovědu
-     * @param he true -> zapnout, false -> vypnout
-     * @return bool nový stav nápovědy
-     */
+    
     public boolean setHelpEnabled(boolean he){
         return helpEnabled = he;
     }
     
-    /**
-     * Přiřadí desce síťové spojení
-     * @param netlink Objekt síťového spojení
-     */
+    
     public void setNetLink(NetLink netlink){
         this.netlink = netlink;
         if(netlink == null)
@@ -149,17 +106,12 @@ public class Desk extends JPanel {
         updateAllBackgrounds();
     }
     
-    /**
-     * Vrátí objekt síťového spojení
-     * @return Objekt síťového spojení
-     */
+    
     public NetLink getNetLink(){
         return netlink;
     }
     
-    /**
-     * Zahájí novou hru
-     */
+    
     public void newGame()
     {
         player = playerWhite;
@@ -168,26 +120,19 @@ public class Desk extends JPanel {
         history.clearItems();
     }
     
-    /**
-     * Nastaví, že je hra ukončená (již nelze táhnout).
-     */
+    
     public void endGame()
     {
         gameEnded = true;
     }
     
-    /**
-     * Zjistí, jestli je hra ukončená.
-     * @return bool true -> je ukončená, jinak false
-     */
+    
     public boolean isGameEnded()
     {
         return gameEnded;
     }
     
-    /**
-     * Rozestaví figurky na desce do výchozí polohy
-     */
+    
     public void resetDesk()
     {
         getWhitePlayer().purgeFigures();
@@ -202,9 +147,7 @@ public class Desk extends JPanel {
         history.deskWasResetted();
     }
     
-    /**
-     * Předá tah dalšímu hráči.
-     */
+    
     public void nextPlayer()
     {
         player = player.opponent();
@@ -216,63 +159,44 @@ public class Desk extends JPanel {
         updateAllBackgrounds();
     }
     
-    /**
-     * Získá hráče na tahu
-     * @return hráč, který je momentálně na tahu.
-     */
+    
     public Player getPlayer()
     {
         return player;
     }
     
-    /**
-     * Získá bílého hráče
-     * @return objekt bílého hráče.
-     */
+    
     public Player getWhitePlayer()
     {
         return playerWhite;
     }
     
-    /**
-    * Získá černého hráče
-    * @return objekt černého hráče.
-    */
+    
     public Player getBlackPlayer()
     {
         return playerBlack;
     }
     
-    /**
-     * Získá označené políčko
-     * @return objekt aktuálně označeného políčka, null pokud žádné není označené.
-     */
+    
     public Position selected()
     {
         return selected;
     }
     
-    /**
-     * Označí políčko
-     * @param position Políčko k označení
-     */
+    
     public void select(Position position)
     {
         selected = position;
     }
     
-    /**
-     * Odznačí políčko
-     */
+    
     public void clearSelected()
     {
         selected = null;
         updateAllBackgrounds();
     }
     
-    /**
-     * Provede překreslení pozadí políček
-     */
+    
     public void updateAllBackgrounds(){
         for( int x=0 ; x<8 ; x++ ){
             for( int y=0 ; y<8 ; y++ ){
@@ -286,12 +210,7 @@ public class Desk extends JPanel {
         return ( ( column >= 0 && column < 8 ) && ( row >= 0 && row < 8 ) );
     }
 
-    /**
-     * Získá políčko na zadané pozici
-     * @param column sloupec políčka (0-7)
-     * @param row řádek políčka (0-7)
-     * @return políčko na uadané pozici, null pokud takové políčko neexistuje
-     */
+    
     public Position getPositionAt(int column, int row)
     {
             if(isAtDesk(column, row)){

@@ -1,23 +1,11 @@
-/**
- * IJA - projekt 2013
- * soubor: Position.java
- * Implementace policka na sachovnici
- * 
- * Autori:
- *         @author Michal Dobes (xdobes13)
- *         @author Jan Kalina   (xkalin03)
- */
+
 
 package ija.projekt.base;
 import ija.projekt.figures.*;
 import javax.swing.*;
 import ija.projekt.network.*;
 
-/**
- * Políčko herní plochy (graficky reprezentované JButtonem)
- * @author Jan Kalina <xkalin03@stud.fit.vutbr.cz>
- * @author Michal Dobes <xdobes13@stud.fit.vutbr.cz>
- */
+
 public final class Position extends JButton {
     
     // ikony hernich kamenu spolecne pro vsechna Position
@@ -30,10 +18,7 @@ public final class Position extends JButton {
     private Desk desk; // odkaz na hraci plochu
     private Figure figure; // kamen na teto pozici
     
-    /**
-     * Statický konstruktor - načítá ikony políček při startu aplikace
-     * do statických proměnných, aby se nemusely načítat pro každé políčko
-     */
+    
     static {
         Position.blackIcon = new ImageIcon(Position.class.getResource("/ija/projekt/images/black.png"));
         Position.black2Icon = new ImageIcon(Position.class.getResource("/ija/projekt/images/black2.png"));
@@ -41,12 +26,7 @@ public final class Position extends JButton {
         Position.white2Icon = new ImageIcon(Position.class.getResource("/ija/projekt/images/white2.png"));
     }
     
-    /**
-     * Konstruktor políčka herní plochy
-     * @param desk Herní plocha
-     * @param x Horizontální souřadnice s 0 v levém rohu plochy
-     * @param y Vertikální souřadnice s 0 ve spodním rohu plochy
-     */
+    
     public Position(Desk desk, int x, int y)
     {
         this.desk = desk;
@@ -65,18 +45,13 @@ public final class Position extends JButton {
         setBorder(null);
     }
     
-    /**
-     * Jde o políčko černé barvy? (nikoliv figurky!)
-     * @return true pokud je černé
-     */
+    
     public boolean isPositionBlack()
     {
         return ((x+y)%2==0);
     }
     
-    /**
-     * Přebarvení pozadí políčka podle aktuálního výběru
-     */
+    
     public void updateBackground()
     {
         if(desk.selected()==this){
@@ -119,30 +94,20 @@ public final class Position extends JButton {
         }
     }
     
-    /**
-     * Umístění figurky na toto políčko
-     * @param figure figurka
-     */
+    
     public void placeFigure(Figure figure)
     {
         this.figure = figure;
         updateIcon();
     }
     
-    /**
-     * Získání figurky na tomto políčku
-     * @return figurka
-     */
+    
     public Figure getFigure()
     {
 	return figure;
     }
     
-    /**
-     * Odstranění figurky
-     * Voláno pro vyhození figurky
-     * @return vyhozená figurka
-     */
+    
     public Figure removeFigure()
     {
         Figure old = figure;
@@ -150,10 +115,7 @@ public final class Position extends JButton {
         return old;
     }
 
-    /**
-     * Aktualizace ikony JButtonu podle figurky,
-     * kterou pozice obsahuje
-     */
+    
     public void updateIcon()
     {
         if(figure == null){
@@ -173,9 +135,7 @@ public final class Position extends JButton {
         }
     }
     
-    /**
-     * Výběr této pozice
-     */
+    
     public void select()
     {
         if(figure == null || figure.getPlayer() != desk.getPlayer()){
@@ -187,10 +147,7 @@ public final class Position extends JButton {
         desk.updateAllBackgrounds();
     }
     
-    /**
-     * Pokus o přeměnu kamene v dámu
-     * Voláno po přemístění kamene na tuto pozici
-     */
+    
     public void tryChangeStoneToQueen()
     {
         if(
@@ -203,26 +160,24 @@ public final class Position extends JButton {
         }
     }
     
-    /**
-     * Obsluha události kliknutí na pozici uživatelem
-     */
+    
     public void onClick()
     {
         if (desk.isGameEnded())
         {
-            JOptionPane.showMessageDialog(Game.getWindow(), "Hra již skončila a vítězi bylo pogratulováno."
-                    + "\nPro novou hru zvolte Hra -> Nová Hra.",
-               "Nelze hrát", JOptionPane.INFORMATION_MESSAGE);
-            System.err.println("Hra již skončila!");
+            JOptionPane.showMessageDialog(Game.getWindow(), "Hra jiÅ¾ skonÄ�ila a vÃ­tÄ›zi bylo pogratulovÃ¡no."
+                    + "\nPro novou hru zvolte Hra -> NovÃ¡ Hra.",
+               "Nelze hrÃ¡t", JOptionPane.INFORMATION_MESSAGE);
+            System.err.println("Hra jiÅ¾ skonÄ�ila!");
             return;
         }
         
         // Jsme vubec v soucasnosti?
         if (!desk.getHistory().inPresent())
         {
-            JOptionPane.showMessageDialog(Game.getWindow(), "Snažíte se změnit historii. To není možné.",
-               "Jste včerejší", JOptionPane.INFORMATION_MESSAGE);
-            System.err.println("Uživatel nemůže hrát, pohybuje se v historii!");
+            JOptionPane.showMessageDialog(Game.getWindow(), "SnaÅ¾Ã­te se zmÄ›nit historii. To nenÃ­ moÅ¾nÃ©.",
+               "Jste vÄ�erejÅ¡Ã­", JOptionPane.INFORMATION_MESSAGE);
+            System.err.println("UÅ¾ivatel nemÅ¯Å¾e hrÃ¡t, pohybuje se v historii!");
             return;
         }
         
@@ -230,8 +185,8 @@ public final class Position extends JButton {
         if (desk.getPlayer().type() != Player.Type.HUMAN)
         {
             JOptionPane.showMessageDialog(Game.getWindow(), "Nejste na tahu",
-               "Nyní je na tahu druhý hráč!", JOptionPane.INFORMATION_MESSAGE);
-            System.err.println("Uživatel nemůže hrát, na tahu je druhý hráč!");
+               "NynÃ­ je na tahu druhÃ½ hrÃ¡Ä�!", JOptionPane.INFORMATION_MESSAGE);
+            System.err.println("UÅ¾ivatel nemÅ¯Å¾e hrÃ¡t, na tahu je druhÃ½ hrÃ¡Ä�!");
             return;
         }
         
@@ -351,7 +306,7 @@ public final class Position extends JButton {
                     && getDesk().getWhitePlayer().loses() && desk.getPlayer().isWhite())
             {
                 getDesk().endGame();
-                JOptionPane.showMessageDialog(Game.getWindow(), "Vyhrává černý hráč. Gratuluji.",
+                JOptionPane.showMessageDialog(Game.getWindow(), "VyhrÃ¡vÃ¡ Ä�ernÃ½ hrÃ¡Ä�. Gratuluji.",
                "Konec hry", JOptionPane.INFORMATION_MESSAGE);
             }
             
@@ -361,16 +316,13 @@ public final class Position extends JButton {
             {
                 System.out.println("History: " + getDesk().getHistory().getCurrent());
                 getDesk().endGame();
-                JOptionPane.showMessageDialog(Game.getWindow(), "Vyhrává bílý hráč. Gratuluji.",
+                JOptionPane.showMessageDialog(Game.getWindow(), "VyhrÃ¡vÃ¡ bÃ­lÃ½ hrÃ¡Ä�. Gratuluji.",
                "Konec hry", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
     
-    /**
-     * Získání označení pozice
-     * @return Označení pozice
-     */
+    
     @Override public String toString()
     {
         char col = (char)((int)'a'+this.x);
@@ -378,10 +330,7 @@ public final class Position extends JButton {
         return col + Integer.toString(row);
     }
     
-    /**
-     * Reset pozice do stavu na počátku partie
-     * Voláno při otevření nové hry (Desk.newGame())
-     */
+    
     public void resetPosition()
     {
         if(isPositionBlack()){
@@ -399,58 +348,36 @@ public final class Position extends JButton {
         updateBackground();
     }
     
-    /**
-     * Hrací deska
-     * @return Hrací deska
-     */
+    
     public Desk getDesk()
     {
         return desk;
     }
     
-    /**
-     * Číslo sloupce na které pozice leží
-     * @return Číslo sloupce hrací desky (0-7)
-     */
+    
     public byte getColumn(){
         return (byte)x;
     }
     
-    /**
-     * Číslo řádku na kterém pozice leží
-     * @return Číslo řádku hrací desky (0-7)
-     */
+    
     public byte getRow(){
         return (byte)y;
     }
     
-    /**
-     * Získání jiné pozice hrací desky relativně vůči této pozici
-     * @param dx Přírůstek horizontální souřadnice
-     * @param dy Přírůstek vertikální souřadnice
-     * @return Pozice
-     */
+    
     public Position nextPosition(int dx, int dy)
     {
 	return desk.getPositionAt(this.x + dx, this.y + dy);
     }
     
-    /**
-     * Leží tato pozice na diagonále danou pozicí
-     * @param p daná pozice
-     * @return Zdali leží na diagonále
-     */
+    
     public boolean isDiagonalOf(Position p)
     {
         return (Math.abs(p.x - this.x) == Math.abs(p.y - this.y));
     }
 
 
-    /**
-     * První neprázdná pozice v cestě na diagonále z této pozice na cílovou
-     * @param destination Cílová pozice
-     * @return První pozice na diagonále s figurkou
-     */
+    
     public Position getFirstStoneInWay(Position destination)
     {
         if (!this.isDiagonalOf(destination))
@@ -468,11 +395,7 @@ public final class Position extends JButton {
         return null;
     }
     
-    /**
-     * Zdali jsou pozice totožné (leží na stejných souřadnicích)
-     * @param o pozice se kterou je porovnáváno
-     * @return zdali mají totožné souřadnici
-     */
+    
     @Override public boolean equals(Object o)
     {
 	if (o instanceof Position)
@@ -483,9 +406,7 @@ public final class Position extends JButton {
 	return false;
     }
     
-    /**
-     * Hash pozice pro umožnění použití HashMapy
-     */
+    
     @Override public int hashCode()
     {
 	return (x + y * 10);

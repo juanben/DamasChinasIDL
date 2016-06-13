@@ -1,20 +1,11 @@
-/**
- * IJA - projekt 2013
- * soubor: AIDialog.java
- * Dialog pro vyber umele inteligence
- * 
- * Autori:
- *         @author Michal Dobes (xdobes13)
- *         @author Jan Kalina   (xkalin03)
- */
-
 package ija.projekt.gui;
-import ija.projekt.ais.Skynet;
-import ija.projekt.base.*;
 import javax.swing.JOptionPane;
 
+import ai.Skynet;
+import ija.projekt.base.*;
+
 /**
- * Dialog pro zahájení hry s počítačem
+ * Dialog pro zahÃ¡jenÃ­ hry s poÄ�Ã­taÄ�em
  * @author Jan Kalina <xkalin03@stud.fit.vutbr.cz>
  * @author Michal Dobes <xdobes13@stud.fit.vutbr.cz>
  */
@@ -24,9 +15,9 @@ public class AIDialog extends javax.swing.JDialog {
 
     /**
      * Konstruktor dialogu
-     * @param parent Rodičovské okno
-     * @param modal Zdali je dialog modální
-     * @param desk Hrací plocha
+     * @param parent RodiÄ�ovskÃ© okno
+     * @param modal Zdali je dialog modÃ¡lnÃ­
+     * @param desk HracÃ­ plocha
      */
     public AIDialog(java.awt.Frame parent, boolean modal, Desk desk) {
         super(parent, modal);
@@ -55,15 +46,15 @@ public class AIDialog extends javax.swing.JDialog {
         confirmButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Hra proti počítači");
+        setTitle("Hra proti poÄ�Ã­taÄ�i");
         setResizable(false);
 
         RG_player.add(RB_white);
         RB_white.setSelected(true);
-        RB_white.setText("Bílý");
+        RB_white.setText("BÃ­lÃ½");
 
         RG_player.add(RB_black);
-        RB_black.setText("Černý");
+        RB_black.setText("ÄŒernÃ½");
 
         RG_AIMachine.add(RB_Skynet);
         RB_Skynet.setSelected(true);
@@ -72,7 +63,7 @@ public class AIDialog extends javax.swing.JDialog {
         jLabel1.setText("Volby:");
         jLabel1.setToolTipText("");
 
-        jLabel2.setText("Protihráč");
+        jLabel2.setText("ProtihrÃ¡Ä�");
 
         jLabel3.setText("Barva");
 
@@ -142,7 +133,7 @@ public class AIDialog extends javax.swing.JDialog {
         // Pokud bychom timto odstrelili vzdaleneho hrace, projistotu se zaptame
         if (aiPlayer.type() == Player.Type.REMOTE)
         {
-            int answer = JOptionPane.showConfirmDialog(rootPane, "Za tohoto hráče již hraje vzdálený hráč.\nPřejete si ukončit spojení?", "Pozor", JOptionPane.YES_NO_OPTION);
+            int answer = JOptionPane.showConfirmDialog(rootPane, "Za tohoto hrÃ¡Ä�e jiÅ¾ hraje vzdÃ¡lenÃ½ hrÃ¡Ä�.\nPÅ™ejete si ukonÄ�it spojenÃ­?", "Pozor", JOptionPane.YES_NO_OPTION);
             
             if(answer == JOptionPane.YES_OPTION){
                 desk.getNetLink().close(); // Korektne ukoncime spojeni
